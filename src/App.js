@@ -15,7 +15,7 @@ class App extends Component {
       width: 400,
       height: 300,
       margin: 30
-    }
+    };
   }
 
   update(key,value) {
@@ -27,7 +27,7 @@ class App extends Component {
   add(key,value) {
     let currval = this.state[key];
       this.setState({
-        [key]: parseInt(currval) + parseInt(value)
+        [key]: parseInt(currval,10) + parseInt(value,10)
       });
   }
 
@@ -86,16 +86,16 @@ class App extends Component {
           dataSeries={dataSeries} dataLabels={dataLabels} colors={colors}/>
         <div>
         <p>Settings</p>
-        <ValueEditor title='Width' elemValue={width} plusOne={()=>{this.add('width',1);}} subOne={()=>{this.add('width',-1);}} update={(value)=> {this.update('width',value);}}  isNumeric={true}/>
-        <ValueEditor title='Height' elemValue={height} plusOne={()=>{this.add('height',1);}} subOne={()=>{this.add('height',-1);}} update={(value)=> {this.update('height',value);}}  isNumeric={true}/>
-        <ValueEditor title='Margin' elemValue={margin} plusOne={()=>{this.add('margin',1);}} subOne={()=>{this.add('margin',-1);}} update={(value)=> {this.update('margin',value);}}  isNumeric={true}/>
+        <ValueEditor title='Width' elemValue={width} plusOne={() => {this.add('width',1);}} subOne={() => {this.add('width',-1);}} update={(value) => {this.update('width',value);}}  isNumeric />
+        <ValueEditor title='Height' elemValue={height} plusOne={() => {this.add('height',1);}} subOne={() => {this.add('height',-1);}} update={(value) => {this.update('height',value);}}  isNumeric/>
+        <ValueEditor title='Margin' elemValue={margin} plusOne={() => {this.add('margin',1);}} subOne={() => {this.add('margin',-1);}} update={(value) => {this.update('margin',value);}}  isNumeric />
         </div>
         <p>Values</p>
-        <ArrayEditor arr={dataSeries} update={(el,ix)=> { this.updateDS(el,ix);} } newElem={()=> {this.addDS();}} canAdd={true}/>
+        <ArrayEditor arr={dataSeries} update={(el,ix) => { this.updateDS(el,ix);}} newElem={() => {this.addDS();}} canAdd />
         <p>Labels</p>
-        <ArrayEditor arr={dataLabels} update={(el,ix)=> { this.updateLabels(el,ix);} } canAdd={false}/>
+        <ArrayEditor arr={dataLabels} update={(el,ix) => { this.updateLabels(el,ix);}} canAdd />
         <p>Colors</p>
-        <ArrayEditor arr={colors} update={(el,ix)=> { this.updateColors(el,ix);} } canAdd={false}/>
+        <ArrayEditor arr={colors} update={(el,ix) => { this.updateColors(el,ix);}} />
       </div>
     );
   }
