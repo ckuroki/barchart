@@ -29,7 +29,7 @@ class BarChart extends Component {
     // Return a <rect> element for each value on dataSeries
     bars=dataSeries.map( (elem,index) => { 
       let barx=(margin+(index*barwidth));
-        return (<rect key={`bar_${index}`}x={barx} y={height-margin-elem}
+        return (<rect key={`bar_${index}`} x={barx} y={height-margin-elem}
                 width={barwidth} height={elem} style={{fill: (index %2)?colors[0]:colors[1],stroke: 'gray'}}/>);
     });
 

@@ -6,7 +6,7 @@ const ArrayEditor = (props) => {
 
   if (arr.length > 0 ) {
     inputs=arr.map( (elem,index) => { 
-        return (<input key={`inp_${index}`} type='text' value={elem} onChange={(ev)=>{ update(ev,index);}} />);
+        return (<input key={`inp_${index}`} size={(elem.length)?elem.length:2} type='text' value={elem} onChange={(ev)=>{ update(ev,index);}} />);
     });
 
     return (

@@ -3,6 +3,7 @@ import logo from './kombilabs.png';
 import './App.css';
 import BarChart from './BarChart';
 import ArrayEditor from './ArrayEditor';
+import ValueEditor from './ValueEditor';
 
 class App extends Component {
   constructor(props) {
@@ -10,8 +11,24 @@ class App extends Component {
     this.state = {
       dataSeries: [150,70,99,20,200],
       dataLabels: ["Alpha","Beta","Gamma","Delta","Epsilon"],
-      colors: ['#90cece','#10cece']
+      colors: ['#90cece','#10cece'],
+      width: 400,
+      height: 300,
+      margin: 30
     }
+  }
+
+  update(key,value) {
+      this.setState({
+        [key]: value 
+      });
+  }
+
+  add(key,value) {
+    let currval = this.state[key];
+      this.setState({
+        [key]: parseInt(currval) + parseInt(value)
+      });
   }
 
   updateDS(ev,ix) {
@@ -35,7 +52,7 @@ class App extends Component {
     let {dataSeries,dataLabels} = this.state;
     this.setState({
       dataSeries: [...dataSeries,100 ],
-      dataLabels: [...dataLabels,"New label" ]
+      dataLabels: [...dataLabels,"New" ]
     });
   }
 
@@ -48,20 +65,37 @@ class App extends Component {
     });
   }
 
+  updateColors(ev,ix) {
+    let {colors} = this.state;
+    this.setState({
+      colors: [...colors.slice(0,ix),
+                   ev.target.value,
+                  ...colors.slice(ix+1)]
+    });
+  }
+
   render() {
-    let {dataSeries,dataLabels,colors} = this.state;
+    let {dataSeries,dataLabels,colors,width,height,margin} = this.state;
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>React Barchart SVG component</h2>
         </div>
-        <BarChart width={400} height={300} margin={30}
+        <BarChart width={width} height={height} margin={margin}
           dataSeries={dataSeries} dataLabels={dataLabels} colors={colors}/>
+        <div>
+        <p>Settings</p>
+        <ValueEditor title='Width' elemValue={width} plusOne={()=>{this.add('width',1);}} subOne={()=>{this.add('width',-1);}} update={(value)=> {this.update('width',value);}}  isNumeric={true}/>
+        <ValueEditor title='Height' elemValue={height} plusOne={()=>{this.add('height',1);}} subOne={()=>{this.add('height',-1);}} update={(value)=> {this.update('height',value);}}  isNumeric={true}/>
+        <ValueEditor title='Margin' elemValue={margin} plusOne={()=>{this.add('margin',1);}} subOne={()=>{this.add('margin',-1);}} update={(value)=> {this.update('margin',value);}}  isNumeric={true}/>
+        </div>
         <p>Values</p>
         <ArrayEditor arr={dataSeries} update={(el,ix)=> { this.updateDS(el,ix);} } newElem={()=> {this.addDS();}} canAdd={true}/>
         <p>Labels</p>
-        <ArrayEditor arr={dataLabels} update={(el,ix)=> { this.updateLabels(el,ix);} } newElem={()=> {this.addLabel();}} canAdd={false}/>
+        <ArrayEditor arr={dataLabels} update={(el,ix)=> { this.updateLabels(el,ix);} } canAdd={false}/>
+        <p>Colors</p>
+        <ArrayEditor arr={colors} update={(el,ix)=> { this.updateColors(el,ix);} } canAdd={false}/>
       </div>
     );
   }
