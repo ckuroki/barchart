@@ -20,7 +20,7 @@ class App extends Component {
 
   update(key,value) {
       this.setState({
-        [key]: value 
+        [key]: parseInt(value,10)|| 0
       });
   }
 
@@ -82,13 +82,15 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>React Barchart SVG component</h2>
         </div>
+        <div className="chart-container">
         <BarChart width={width} height={height} margin={margin}
           dataSeries={dataSeries} dataLabels={dataLabels} colors={colors}/>
+        </div>
         <div>
         <p>Settings</p>
-        <ValueEditor title='Width' elemValue={width} plusOne={() => {this.add('width',1);}} subOne={() => {this.add('width',-1);}} update={(value) => {this.update('width',value);}}  isNumeric />
-        <ValueEditor title='Height' elemValue={height} plusOne={() => {this.add('height',1);}} subOne={() => {this.add('height',-1);}} update={(value) => {this.update('height',value);}}  isNumeric/>
-        <ValueEditor title='Margin' elemValue={margin} plusOne={() => {this.add('margin',1);}} subOne={() => {this.add('margin',-1);}} update={(value) => {this.update('margin',value);}}  isNumeric />
+        <ValueEditor title='Width' elemValue={width} plusOne={() => {this.add('width',1);}} subOne={() => {this.add('width',-1);}} update={(value) => {this.update('width',value);}} />
+        <ValueEditor title='Height' elemValue={height} plusOne={() => {this.add('height',1);}} subOne={() => {this.add('height',-1);}} update={(value) => {this.update('height',value);}} />
+        <ValueEditor title='Margin' elemValue={margin} plusOne={() => {this.add('margin',1);}} subOne={() => {this.add('margin',-1);}} update={(value) => {this.update('margin',value);}} />
         </div>
         <p>Values</p>
         <ArrayEditor arr={dataSeries} update={(el,ix) => { this.updateDS(el,ix);}} newElem={() => {this.addDS();}} canAdd />
