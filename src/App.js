@@ -13,8 +13,7 @@ class App extends Component {
       dataLabels: ["Alpha","Beta","Gamma","Delta","Epsilon"],
       colors: ['#90cece','#10cece'],
       width: 400,
-      height: 300,
-      margin: 30
+      height: 300
     };
   }
 
@@ -50,8 +49,9 @@ class App extends Component {
   }
   addDS() {
     let {dataSeries,dataLabels} = this.state;
+    let randomValue= Math.floor(Math.random() * 100)+100;
     this.setState({
-      dataSeries: [...dataSeries,100 ],
+      dataSeries: [...dataSeries,randomValue ],
       dataLabels: [...dataLabels,"New" ]
     });
   }
@@ -75,7 +75,7 @@ class App extends Component {
   }
 
   render() {
-    let {dataSeries,dataLabels,colors,width,height,margin} = this.state;
+    let {dataSeries,dataLabels,colors,width,height} = this.state;
     return (
       <div className="App">
         <div className="App-header">
@@ -83,14 +83,13 @@ class App extends Component {
           <h2>React Barchart SVG component</h2>
         </div>
         <div className="chart-container">
-        <BarChart width={width} height={height} margin={margin}
+        <BarChart width={width} height={height} 
           dataSeries={dataSeries} dataLabels={dataLabels} colors={colors}/>
         </div>
         <div>
         <p>Settings</p>
         <ValueEditor title='Width' elemValue={width} plusOne={() => {this.add('width',1);}} subOne={() => {this.add('width',-1);}} update={(value) => {this.update('width',value);}} />
         <ValueEditor title='Height' elemValue={height} plusOne={() => {this.add('height',1);}} subOne={() => {this.add('height',-1);}} update={(value) => {this.update('height',value);}} />
-        <ValueEditor title='Margin' elemValue={margin} plusOne={() => {this.add('margin',1);}} subOne={() => {this.add('margin',-1);}} update={(value) => {this.update('margin',value);}} />
         </div>
         <p>Values</p>
         <ArrayEditor arr={dataSeries} update={(el,ix) => { this.updateDS(el,ix);}} newElem={() => {this.addDS();}} canAdd />
