@@ -94,7 +94,7 @@ class App extends Component {
         <p>Values</p>
         <ArrayEditor arr={dataSeries} update={(el,ix) => { this.updateDS(el,ix);}} newElem={() => {this.addDS();}} canAdd />
         <p>Labels</p>
-        <ArrayEditor arr={dataLabels} update={(el,ix) => { this.updateLabels(el,ix);}} canAdd />
+        <ArrayEditor arr={dataLabels} update={(el,ix) => { this.updateLabels(el,ix);}} />
         <p>Colors</p>
         <ArrayEditor arr={colors} update={(el,ix) => { this.updateColors(el,ix);}} />
       </div>
