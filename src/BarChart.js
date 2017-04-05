@@ -1,25 +1,16 @@
-import React, { Component,PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import './BarChart.css';
 
-class BarChart extends Component {
-  static propTypes = {
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    dataSeries: PropTypes.array.isRequired,
-    dataLabels: PropTypes.array,
-    colors: PropTypes.array.isRequired
-  }
+const BarChart = (props) => {
+let {width,height,dataSeries,dataLabels,colors} = props;
+let bars=[];
+let labels=[];
+let values=[];
+const xaxis= 50; // Height of x-axis Labels row
 
-  render() {
-  let {width,height,dataSeries,dataLabels,colors} = this.props;
-  let bars=[];
-  let labels=[];
-  let values=[];
-  const xaxis= 50; // Height of x-axis Labels row
-
-  // Draw a box around the SVG using a <path> element
-  // Uses ES6 String interpolation (backquotes)
-  let box= <path d={`M0 0 H${width} V${height} H 0 V 0`} fill="transparent" stroke="black"/>;
+// Draw a box around the SVG using a <path> element
+// Uses ES6 String interpolation (backquotes)
+let box= <path d={`M0 0 H${width} V${height} H 0 V 0`} fill="transparent" stroke="black"/>;
 
   // Check If there is some data to plot
   if (dataSeries.length > 0 ) {
@@ -60,7 +51,14 @@ class BarChart extends Component {
         {values}
       </svg>
     );
-  }
-}
+};
+
+BarChart.propTypes = {
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  dataSeries: PropTypes.array.isRequired,
+  dataLabels: PropTypes.array,
+  colors: PropTypes.array.isRequired
+};
 
 export default BarChart;
