@@ -1,4 +1,4 @@
-## Graphical components by composing SVG using React
+## React Bar Chart SVG component
 ---
 
 This is a basic example of a React component rendering an SVG image.
@@ -25,8 +25,9 @@ Check component code on `src/Barchart.js`.
 
 or 
 
-See complete article on [kombi.io](http://kombi.io/barchart)
+Complete article at [kombi.io](http://kombi.io/composing-svg/)
+
+See [demo](http://kombi.io/barchart/)
 
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
